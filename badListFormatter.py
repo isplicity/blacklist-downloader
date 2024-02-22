@@ -44,6 +44,6 @@ with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
     for slip in sslipBL:
         commandBeforeIp = "add list=blacklist timeout=1d address="
         cammandAfterIp = " comment=sslipBL"
-        file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
+        file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
 
     
