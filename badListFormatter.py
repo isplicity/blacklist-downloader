@@ -1,4 +1,5 @@
 import requests
+import json
 
 dsBlock = "https://blacklists.isplicity.com/blacklists/ds-block.txt"
 combined = "https://blacklists.isplicity.com/blacklists/combined.txt"
@@ -12,10 +13,8 @@ shDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shDrop
 shEDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shEDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
 sslipBL = [f"{row.decode('utf-8')}" for row in requests.get(sslipBL).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
 
-with open("variables.config", 'r') as file:
-    vars = file.readlines()
-    for v in vars:
-        print(v)
+variables = json.load("variables.json")
+print(variables)
 
 def modifyCommand(before, listElement, after):
     if before and after != None:
