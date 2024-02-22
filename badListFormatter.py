@@ -1,6 +1,9 @@
 import requests
 import json
-from variables import *
+
+with open('variables.json', 'r') as file:
+    variables = json.loads(file)
+
 
 dsBlock = "https://blacklists.isplicity.com/blacklists/ds-block.txt"
 combined = "https://blacklists.isplicity.com/blacklists/combined.txt"
@@ -14,7 +17,6 @@ shDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shDrop
 shEDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shEDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
 sslipBL = [f"{row.decode('utf-8')}" for row in requests.get(sslipBL).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
 
-print(filepath)
 
 def modifyCommand(before, listElement, after):
     if before and after != None:
@@ -24,7 +26,7 @@ def modifyCommand(before, listElement, after):
     elif after == None:
         return f"{before}{listElement}"
 
-with open('/YOUR/FILE/PATH/HERE/firewall.rsc', 'w') as file:
+with open(variables['filepath'], 'w') as file:
     file.write("This is some text before each row\nThe \\n is needed for each new line\n\n")
     for ds in dsBlock:
         commandBeforeIp = "ip address add address="
