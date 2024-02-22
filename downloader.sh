@@ -1,6 +1,6 @@
 #!/bin/bash
-#FULLPATH=/var/www/html/blacklists
-FULLPATH=/Users/jamesodell/Documents/git/downloads/
+FULLPATH=/var/www/html/blacklists
+#FULLPATH=/Users/jamesodell/Documents/git/downloads/
 wget -O $FULLPATH/ds-block.txt https://www.dshield.org/block.txt
 wget -O $FULLPATH/sh-drop.txt https://www.spamhaus.org/drop/drop.txt
 wget -O $FULLPATH/sh-edrop.txt https://www.spamhaus.org/drop/edrop.txt
