@@ -13,7 +13,7 @@ shEDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shEDr
 sslipBL = [f"{row.decode('utf-8')}" for row in requests.get(sslipBL).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
 
 
-
+print('test')
 
 def modifyCommand(before, listElement, after):
     if before and after != None:
