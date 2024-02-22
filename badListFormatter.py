@@ -2,7 +2,7 @@ import requests
 import json
 
 with open('variables.json', 'r') as file:
-    variables = json.loads(file)
+    variables = json.loads(file.read())
 
 
 dsBlock = "https://blacklists.isplicity.com/blacklists/ds-block.txt"
@@ -26,7 +26,7 @@ def modifyCommand(before, listElement, after):
     elif after == None:
         return f"{before}{listElement}"
 
-with open(variables['filepath'], 'w') as file:
+with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
     file.write("This is some text before each row\nThe \\n is needed for each new line\n\n")
     for ds in dsBlock:
         commandBeforeIp = "ip address add address="
