@@ -23,7 +23,7 @@ def modifyCommand(before, listElement, after):
     elif after == None:
         return f"{before}{listElement}"
 
-with open('/YOUR/FILE/PATH/HERE/firewall.txt', 'w') as file:
+with open('/YOUR/FILE/PATH/HERE/firewall.rsc', 'w') as file:
     file.write("This is some text before each row\nThe \\n is needed for each new line\n\n")
     for ds in dsBlock:
         commandBeforeIp = "ip address add address="
