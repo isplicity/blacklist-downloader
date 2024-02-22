@@ -12,8 +12,10 @@ shDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shDrop
 shEDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shEDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
 sslipBL = [f"{row.decode('utf-8')}" for row in requests.get(sslipBL).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
 
-
-print('test')
+with open("varibles.config", 'r') as file:
+    vars = file.readlines()
+    for v in vars:
+        print(v)
 
 def modifyCommand(before, listElement, after):
     if before and after != None:
