@@ -6,11 +6,14 @@ shDrop = "https://blacklists.isplicity.com/blacklists/sh-drop.txt"
 shEDrop = "https://blacklists.isplicity.com/blacklists/sh-edrop.txt"
 sslipBL = "https://blacklists.isplicity.com/blacklists/sslipblacklist.txt"
 
-dsBlock = [f"{row.decode('utf-8').split("\t")[0]}/{row.decode('utf-8').split("\t")[2]}" for row in requests.get(dsBlock).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
+dsBlock = [f"{row.decode('utf-8').split('\t')[0]}/{row.decode('utf-8').split('\t')[2]}" for row in requests.get(dsBlock).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
 combined = [f"{row.decode('utf-8')}" for row in requests.get(combined).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
-shDrop = [f"{row.decode('utf-8').split(" ;")[0]}" for row in requests.get(shDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
-shEDrop = [f"{row.decode('utf-8').split(" ;")[0]}" for row in requests.get(shEDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
+shDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
+shEDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shEDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
 sslipBL = [f"{row.decode('utf-8')}" for row in requests.get(sslipBL).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
+
+
+
 
 def modifyCommand(before, listElement, after):
     if before and after != None:
@@ -20,7 +23,7 @@ def modifyCommand(before, listElement, after):
     elif after == None:
         return f"{before}{listElement}"
 
-with open('YOUR/FILE/PATH/file.rsc', 'w') as file:
+with open('/Users/josey/Downloads/firewall.txt', 'w') as file:
     file.write("This is some text before each row\nThe \\n is needed for each new line\n\n")
     for ds in dsBlock:
         commandBeforeIp = "ip address add address="
