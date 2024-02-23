@@ -15,6 +15,7 @@ shDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shDrop
 shEDrop = [f"{row.decode('utf-8').split(' ;')[0]}" for row in requests.get(shEDrop).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != ";"]
 sslipBL = [f"{row.decode('utf-8')}" for row in requests.get(sslipBL).content.split(b"\n") if len(row.decode('utf-8')) > 0 and row.decode('utf-8')[0] != "#"]
 
+noDupList = list(set(dsBlock) | set(shDrop) | set(shEDrop) | set(sslipBL))
 
 def modifyCommand(before, listElement, after):
     if before and after != None:
@@ -26,24 +27,31 @@ def modifyCommand(before, listElement, after):
 
 with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
     file.write("/ip firewall address-list\n:foreach i in=[find where list=blacklist] do={remove $i}\n\n")
-    for ds in dsBlock:
+
+    for du in noDupList:
         commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=dsBlock"
-        file.write(f"{modifyCommand(commandBeforeIp, ds, cammandAfterIp)}\n")
+        cammandAfterIp = None
+        file.write(f"{modifyCommand(commandBeforeIp, du, cammandAfterIp)}\n")
+
+
+    # for ds in dsBlock:
+    #     commandBeforeIp = "add list=blacklist timeout=1d address="
+    #     cammandAfterIp = None
+    #     file.write(f"{modifyCommand(commandBeforeIp, ds, cammandAfterIp)}\n")
     
-    for sh in shDrop:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=shDrop"
-        file.write(f"{modifyCommand(commandBeforeIp, sh, cammandAfterIp)}\n")
+    # for sh in shDrop:
+    #     commandBeforeIp = "add list=blacklist timeout=1d address="
+    #     cammandAfterIp = None
+    #     file.write(f"{modifyCommand(commandBeforeIp, sh, cammandAfterIp)}\n")
 
-    for she in shEDrop:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=shEDrop"
-        file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
+    # for she in shEDrop:
+    #     commandBeforeIp = "add list=blacklist timeout=1d address="
+    #     cammandAfterIp = None
+    #     file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
 
-    for slip in sslipBL:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=sslipBL"
-        file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
+    # for slip in sslipBL:
+    #     commandBeforeIp = "add list=blacklist timeout=1d address="
+    #     cammandAfterIp = None
+    #     file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
 
     
