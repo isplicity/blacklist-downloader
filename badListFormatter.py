@@ -49,26 +49,26 @@ with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
         if ds not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=dsBlock"
-            file.write(f"{modifyCommand(commandBeforeIp, ds, cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, ds.strip("\n"), cammandAfterIp)}\n")
             evalList.append(ds)
     
     for sh in shDrop:
         if sh not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=shDrop"
-            file.write(f"{modifyCommand(commandBeforeIp, sh, cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, sh.strip("\n"), cammandAfterIp)}\n")
             evalList.append(sh)
 
     for she in shEDrop:
         if she not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=shEDrop"
-            file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, she.strip("\n"), cammandAfterIp)}\n")
             evalList.append(she)
 
     for slip in sslipBL:
         if slip not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=sslipBL"
-            file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, slip.strip("\n"), cammandAfterIp)}\n")
             evalList.append(slip)
