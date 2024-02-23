@@ -41,26 +41,36 @@ def modifyCommand(before, listElement, after):
     elif after == None:
         return f"{before}{listElement}"
 
+evalList = []
+
 with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
     file.write("/ip firewall address-list\n:foreach i in=[find where list=blacklist] do={remove $i}\n\n")
     for ds in dsBlock:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=dsBlock"
-        file.write(f"{modifyCommand(commandBeforeIp, ds, cammandAfterIp)}\n")
+        if ds not in evalList:
+            commandBeforeIp = "add list=blacklist timeout=1d address="
+            cammandAfterIp = " comment=dsBlock"
+            file.write(f"{modifyCommand(commandBeforeIp, ds, cammandAfterIp)}\n")
+            evalList.append(ds)
     
     for sh in shDrop:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=shDrop"
-        file.write(f"{modifyCommand(commandBeforeIp, sh, cammandAfterIp)}\n")
+        if sh not in evalList:
+            commandBeforeIp = "add list=blacklist timeout=1d address="
+            cammandAfterIp = " comment=shDrop"
+            file.write(f"{modifyCommand(commandBeforeIp, sh, cammandAfterIp)}\n")
+            evalList.append(sh)
 
     for she in shEDrop:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=shEDrop"
-        file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
+        if she not in evalList:
+            commandBeforeIp = "add list=blacklist timeout=1d address="
+            cammandAfterIp = " comment=shEDrop"
+            file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
+            evalList.append(she)
 
     for slip in sslipBL:
-        commandBeforeIp = "add list=blacklist timeout=1d address="
-        cammandAfterIp = " comment=sslipBL"
-        file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
+        if slip not in evalList:
+            commandBeforeIp = "add list=blacklist timeout=1d address="
+            cammandAfterIp = " comment=sslipBL"
+            file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
+            evalList.append(slip)
 
     
