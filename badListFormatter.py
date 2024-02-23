@@ -46,29 +46,37 @@ evalList = []
 with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
     file.write("/ip firewall address-list\n:foreach i in=[find where list=blacklist] do={remove $i}\n\n")
     for ds in dsBlock:
+        ds = ds.strip("\n")
+        ds = ds.strip("\r")
         if ds not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=dsBlock"
-            file.write(f"{modifyCommand(commandBeforeIp, ds.strip("\n").strip("\r"), cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, ds, cammandAfterIp)}\n")
             evalList.append(ds)
     
     for sh in shDrop:
         if sh not in evalList:
+            sh = sh.strip("\n")
+            sh = sh.strip("\r")
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=shDrop"
-            file.write(f"{modifyCommand(commandBeforeIp, sh.strip("\n").strip("\r"), cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, sh, cammandAfterIp)}\n")
             evalList.append(sh)
 
     for she in shEDrop:
+        she = she.strip("\n")
+        she = she.strip("\r")
         if she not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=shEDrop"
-            file.write(f"{modifyCommand(commandBeforeIp, she.strip("\n").strip("\r"), cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, she, cammandAfterIp)}\n")
             evalList.append(she)
 
     for slip in sslipBL:
+        slip = slip.strip("\n")
+        slip = slip.strip("\r")
         if slip not in evalList:
             commandBeforeIp = "add list=blacklist timeout=1d address="
             cammandAfterIp = " comment=sslipBL"
-            file.write(f"{modifyCommand(commandBeforeIp, slip.strip("\n").strip("\r"), cammandAfterIp)}\n")
+            file.write(f"{modifyCommand(commandBeforeIp, slip, cammandAfterIp)}\n")
             evalList.append(slip)
