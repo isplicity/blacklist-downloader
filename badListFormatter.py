@@ -5,8 +5,6 @@ import variables
 
 timstampNow = datetime.datetime.now()
 
-
-
 dsBlockUrl = "https://www.dshield.org/block.txt"
 shDropUrl = "https://www.spamhaus.org/drop/drop.txt"
 shEDropUrl = "https://www.spamhaus.org/drop/edrop.txt"
