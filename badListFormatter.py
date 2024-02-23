@@ -1,11 +1,10 @@
 import requests
 import json
 import datetime
+import variables
 
 timstampNow = datetime.datetime.now()
 
-with open('variables.json', 'r') as file:
-    variables = json.loads(file.read())
 
 
 dsBlockUrl = "https://www.dshield.org/block.txt"
@@ -46,7 +45,7 @@ def modifyCommand(before, listElement, after):
 
 evalList = []
 
-with open(f"{variables['default_filepath']}blacklist.rsc", 'w') as file:
+with open(f"{variables.default_filepath}blacklist.rsc", 'w') as file:
     file.write(f"# Last Updated At: {timstampNow} \n")
     file.write("/ip firewall address-list\n:foreach i in=[find where list=blacklist] do={remove $i}\n\n")
     for ds in dsBlock:
