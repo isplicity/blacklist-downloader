@@ -1,4 +1,4 @@
-name = "server"
-email = "isplicity@isplicity.com"
-default_filepath = "/var/www/html/blacklists/"
+name = "Chris Josey"
+email = "cjosey@@isplicity.com"
+default_filepath = "/Users/josey/Downloads/"
 
